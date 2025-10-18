@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3 uid="uid://rll6unyudef4"]
+
+[ext_resource type="Script" uid="uid://cfymqbsi58wuj" path="res://objects/player/player.gd" id="1_gnkmh"]
+[ext_resource type="Texture2D" uid="uid://134f4cujlad8" path="res://assets/player/character_yellow_jump.png" id="1_jnjyq"]
+[ext_resource type="Texture2D" uid="uid://by35k0myu2h1u" path="res://assets/player/character_yellow_idle.png" id="2_gnkmh"]
+[ext_resource type="Texture2D" uid="uid://cdjblq785i8ne" path="res://assets/player/character_yellow_walk_a.png" id="3_xkryw"]
+[ext_resource type="Texture2D" uid="uid://dsx0napty1jou" path="res://assets/player/character_yellow_walk_b.png" id="4_ow0dq"]
+[ext_resource type="Script" uid="uid://b27jv84pn1ln0" path="res://objects/state_machine.gd" id="6_ow0dq"]
+[ext_resource type="Script" uid="uid://bckslqkc3gfta" path="res://objects/player/idle.gd" id="6_xkryw"]
+[ext_resource type="Script" uid="uid://ck1cf732pdejg" path="res://objects/player/walk.gd" id="8_m4kly"]
+[ext_resource type="Script" uid="uid://xyn14cryq06n" path="res://objects/player/jump.gd" id="9_xgwla"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxedw"]
+radius = 22.0
+height = 82.0
+
+[sub_resource type="Animation" id="Animation_bi5m7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_gnkmh")]
+}
+
+[sub_resource type="Animation" id="Animation_xgwla"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_gnkmh")]
+}
+
+[sub_resource type="Animation" id="Animation_45urx"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_jnjyq")]
+}
+
+[sub_resource type="Animation" id="Animation_psowp"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_xkryw"), ExtResource("4_ow0dq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c34wb"]
+_data = {
+&"RESET": SubResource("Animation_bi5m7"),
+&"idle": SubResource("Animation_xgwla"),
+&"jump": SubResource("Animation_45urx"),
+&"walk": SubResource("Animation_psowp")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_gnkmh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gnkmh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("CapsuleShape2D_bxedw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c34wb")
+}
+
+[node name="States" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_ow0dq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="States" node_paths=PackedStringArray("player")]
+script = ExtResource("6_xkryw")
+player = NodePath("../..")
+
+[node name="Walk" type="Node" parent="States" node_paths=PackedStringArray("player")]
+script = ExtResource("8_m4kly")
+player = NodePath("../..")
+
+[node name="Jump" type="Node" parent="States" node_paths=PackedStringArray("player")]
+script = ExtResource("9_xgwla")
+player = NodePath("../..")
