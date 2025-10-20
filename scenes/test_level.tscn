@@ -1,7 +1,17 @@
-[gd_scene load_steps=2 format=4 uid="uid://dvxwqfis7h2am"]
+[gd_scene load_steps=3 format=4 uid="uid://dvxwqfis7h2am"]
 
 [ext_resource type="TileSet" uid="uid://r1cps8d24jm3" path="res://assets/tilesets/tiles.tres" id="1_2venv"]
+[ext_resource type="PackedScene" uid="uid://d1kl6r3uaicdj" path="res://objects/coin.tscn" id="2_paw1w"]
 
-[node name="TileMapLayer" type="TileMapLayer"]
+[node name="TestLevel" type="TileMapLayer"]
 tile_map_data = PackedByteArray("AAARAAkAAAAHAAMAAAAQAAkAAAAHAAYAAAAPAAkAAAAHAAYAAAAOAAkAAAAHAAYAAAANAAkAAAAHAAYAAAAMAAkAAAAHAAYAAAALAAkAAAAHAAYAAAAKAAkAAAAHAAYAAAAJAAkAAAAHAAYAAAAIAAkAAAAHAAYAAAAHAAkAAAAHAAYAAAAGAAkAAAAHAAYAAAAFAAkAAAAHAAYAAAAEAAkAAAAHAAYAAAADAAkAAAAHAAYAAAACAAkAAAAHAAYAAAABAAkAAAAHAAYAAAAAAAkAAAAHAAcAAAA=")
 tile_set = ExtResource("1_2venv")
+
+[node name="Coin" parent="." instance=ExtResource("2_paw1w")]
+position = Vector2(378, 534)
+
+[node name="Coin2" parent="." instance=ExtResource("2_paw1w")]
+position = Vector2(429, 534)
+
+[node name="Coin3" parent="." instance=ExtResource("2_paw1w")]
+position = Vector2(480, 534)

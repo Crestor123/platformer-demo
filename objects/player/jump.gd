@@ -1,6 +1,6 @@
 extends PlayerState
 
-func update(delta):
+func update(_delta):
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		player.velocity.x = direction * player.SPEED

@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcwfipk1iftvy"]
+[gd_scene load_steps=5 format=3 uid="uid://dcwfipk1iftvy"]
 
+[ext_resource type="Script" uid="uid://bwreqihx0krws" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dvxwqfis7h2am" path="res://scenes/test_level.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://rll6unyudef4" path="res://objects/player/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://dx5cnl3dcj3hc" path="res://scenes/ui/ui.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_lbhrr")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("1_yqjtg")]
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(112, 451)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("3_lnu2h")]

@@ -21,7 +21,8 @@ func update(delta):
 		currentState.update(delta)
 	
 func change_state(new_state: String):
-	if states.has(new_state):
+	#If the specified state is in the list of states, enter that state
+	if states.has(new_state.to_lower()):
 		currentState = states[new_state]
 		currentState.enter()
 	pass
