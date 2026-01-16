@@ -3,7 +3,7 @@ extends PlayerState
 func update(_delta):
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
-		player.velocity.x = direction * player.SPEED
+		player.velocity.x = direction * player.SPEED + player.wind_resistance
 		if player.velocity.x >= 0: player.Sprite.flip_h = false
 		if player.velocity.x <= 0: player.Sprite.flip_h = true
 	else:

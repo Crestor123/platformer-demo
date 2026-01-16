@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dron34s3dluec"]
+
+[ext_resource type="Script" uid="uid://c34pbhajcpa2n" path="res://objects/wind_resist_area.gd" id="1_t7786"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7786"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="WindResistArea" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_t7786")
+wind_resistance_value = -150.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t7786")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
