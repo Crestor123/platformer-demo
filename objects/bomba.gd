@@ -5,7 +5,6 @@ extends Area2D
 
 #This function is connected to the on_body_entered signal of the area2D
 func _on_body_entered(_body):
-	Game.add_score(1)
 	if _body.has_method("modify_health"):
-		_body.modify_health(20) #Adds 20 health percentage points.
-	queue_free()	#Deletes the node and all its children
+		_body.modify_health(-20) #Deals 20 damage percentage points.
+		queue_free()	#Deletes the node and all its children
