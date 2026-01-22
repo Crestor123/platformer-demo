@@ -19,7 +19,7 @@ func _ready():
 func update(delta):
 	if currentState:
 		currentState.update(delta)
-	
+
 func change_state(new_state: String):
 	#If the specified state is in the list of states, enter that state
 	if states.has(new_state.to_lower()):
